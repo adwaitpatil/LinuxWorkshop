@@ -16,9 +16,15 @@ int main(void)
 	pwm* vf_pwm = NULL;
 	uint32_t ret = EXIT_SUCCESS;
 	uint32_t pwm_period = 0;
+	uint32_t pwm_number = 0;
+	uint32_t pwm_chip_number = 0;
 	uint32_t pwm_duty_cycle = 0;
 
-	vf_pwm = libsoc_pwm_request(0, 0, LS_WEAK);
+	printf("Enter PWM chip number:\t");
+	scanf("%d", &pwm_chip_number);
+	printf("Enter PWM number:\t");
+	scanf("%d", &pwm_number);
+	vf_pwm = libsoc_pwm_request(pwm_chip_number, pwm_number, LS_WEAK);
 	if (vf_pwm == NULL) {
 		perror("PWM request failed");
 		return EXIT_FAILURE;
