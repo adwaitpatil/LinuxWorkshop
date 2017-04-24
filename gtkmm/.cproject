@@ -34,8 +34,8 @@
 							</tool>
 							<tool id="cdt.managedbuild.tool.gnu.cross.c.linker.719605532" name="Cross GCC Linker" superClass="cdt.managedbuild.tool.gnu.cross.c.linker"/>
 							<tool command="${CXX}" id="cdt.managedbuild.tool.gnu.cross.cpp.linker.519074980" name="Cross G++ Linker" superClass="cdt.managedbuild.tool.gnu.cross.cpp.linker">
-								<option id="gnu.cpp.link.option.flags.571705640" name="Linker flags" superClass="gnu.cpp.link.option.flags" value="${LDFLAGS} `/usr/local/oecore-x86_64/sysroots/x86_64-angstromsdk-linux/usr/bin/pkg-config --libs gtkmm-2.4`" valueType="string"/>
-								<option id="gnu.cpp.link.option.libs.480941235" name="Libraries (-l)" superClass="gnu.cpp.link.option.libs" valueType="libs">
+								<option id="gnu.cpp.link.option.flags.571705640" name="Linker flags" superClass="gnu.cpp.link.option.flags" useByScannerDiscovery="false" value="${LDFLAGS} `/usr/local/oecore-x86_64/sysroots/x86_64-angstromsdk-linux/usr/bin/pkg-config --libs gtkmm-2.4`" valueType="string"/>
+								<option id="gnu.cpp.link.option.libs.480941235" name="Libraries (-l)" superClass="gnu.cpp.link.option.libs" useByScannerDiscovery="false" valueType="libs">
 									<listOptionValue builtIn="false" value="m"/>
 								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.cpp.linker.input.1630862132" superClass="cdt.managedbuild.tool.gnu.cpp.linker.input">
