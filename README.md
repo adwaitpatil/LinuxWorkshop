@@ -1,4 +1,4 @@
-##### Setup:
+##### Setup
 
 [Aster Carrier Board](https://www.toradex.com/products/carrier-boards/aster-carrier-board)
 
