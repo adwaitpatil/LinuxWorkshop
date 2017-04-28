@@ -14,12 +14,23 @@
  * libsoc GPIO documentation: http://jackmitch.github.io/libsoc/c/gpio/#gpio
  */
 
-volatile bool interrupt_occurred = false;
 volatile bool led_status = false;
+static uint32_t times = 0;
+
+gpio *gpio_interrupt = NULL;
+gpio *gpio_led = NULL;
 
 int gpio_interrupt_callback(void* arg)
 {
-	interrupt_occurred = true;
+	if (!led_status) {
+		led_status = true;
+		libsoc_gpio_set_level(gpio_led, HIGH);
+	} else {
+		led_status = false;
+		libsoc_gpio_set_level(gpio_led, LOW);
+	}
+	times++;
+	printf("Interrupt occurred %d times\n", times);
 
 	return 0;
 }
@@ -29,8 +40,6 @@ int main(void)
 	uint32_t gpio_input;
 	uint32_t led_output;
 	uint32_t ret = 0;
-	gpio *gpio_interrupt = NULL;
-	gpio *gpio_led = NULL;
 
 	printf("Enter the GPIO number to use as interrupt:\t");
 	scanf("%d", &gpio_input);
@@ -79,25 +88,13 @@ int main(void)
 		goto exit;
 	}
 
-	printf("Waiting for interrupt\n");
+	printf("Waiting for interrupt. Press 'q' and 'Enter' at any time to exit\n");
 
+	char key = -1;
 	while (true) {
-		if (interrupt_occurred) {
-
-			interrupt_occurred = false;
-
-			if (!led_status) {
-				led_status = true;
-				libsoc_gpio_set_level(gpio_led, HIGH);
-			} else {
-				led_status = false;
-				libsoc_gpio_set_level(gpio_led, LOW);
-			}
-			printf("Interrupt occurred\n");
-			/* Uncomment this to exit on first interrupt */
-			//goto exit;
-		}
-		usleep(200);
+		key = fgetc(stdin);
+		if (key == 'q')
+			goto exit;
 	}
 
 exit:
