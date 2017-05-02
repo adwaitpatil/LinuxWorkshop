@@ -24,7 +24,7 @@ int main(void)
 	scanf("%d", &pwm_chip_number);
 	printf("Enter PWM number:\t");
 	scanf("%d", &pwm_number);
-	vf_pwm = libsoc_pwm_request(pwm_chip_number, pwm_number, LS_WEAK);
+	vf_pwm = libsoc_pwm_request(pwm_chip_number, pwm_number, LS_GREEDY);
 	if (vf_pwm == NULL) {
 		perror("PWM request failed");
 		return EXIT_FAILURE;
