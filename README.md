@@ -21,6 +21,7 @@ Build and install the OE-Core aka Yocto SDK, for instructions related to buildin
 To facilitate development, a sample SDK can be downloaded from this [link](https://share.toradex.com/erezkkl0c5yunve). Install the SDK by executing the following from the command line
 
 ```
+chmod a+x angstrom-glibc-x86_64-armv7at2hf-neon-v2016.12-toolchain.sh
 ./angstrom-glibc-x86_64-armv7at2hf-neon-v2016.12-toolchain.sh
 ```
 
