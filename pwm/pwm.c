@@ -11,14 +11,19 @@
  * libsoc PWM API Documentation: https://jackmitch.github.io/libsoc/c/pwm/
  */
 
+#define SERVO_PERIOD          20000000
+#define DMIN                  150000
+#define DMAX                  2000000
+#define STEP_SIZE             5
+
 int main(void)
 {
 	pwm* vf_pwm = NULL;
 	uint32_t ret = EXIT_SUCCESS;
-	uint32_t pwm_period = 0;
 	uint32_t pwm_number = 0;
 	uint32_t pwm_chip_number = 0;
-	uint32_t pwm_duty_cycle = 0;
+	uint32_t count = 2;
+	uint32_t ms;
 
 	printf("Enter PWM chip number:\t");
 	scanf("%d", &pwm_chip_number);
@@ -30,19 +35,10 @@ int main(void)
 		return EXIT_FAILURE;
 	}
 
-	printf("Enter PWM Period:\t");
-	scanf("%d", &pwm_period);
-	ret = libsoc_pwm_set_period(vf_pwm, pwm_period);
+	/* As required for Tower Pro Micro Servo 9g SG90 */
+	ret = libsoc_pwm_set_period(vf_pwm, SERVO_PERIOD);
 	if (ret == EXIT_FAILURE) {
 		perror("PWM set period failed");
-		goto exit_failure;
-	}
-
-	printf("Enter PWM Duty Cycle:\t");
-	scanf("%d", &pwm_duty_cycle);
-	ret = libsoc_pwm_set_duty_cycle(vf_pwm, pwm_duty_cycle);
-	if (ret == EXIT_FAILURE) {
-		perror("PWM set duty cycle failed");
 		goto exit_failure;
 	}
 
@@ -52,8 +48,25 @@ int main(void)
 		goto exit_failure;
 	}
 
-	printf("PWM will be running for 10 seconds\n");
-	sleep(10);
+	while (count > 0) {
+		for (ms = DMIN; ms <= DMAX;) {
+			ret = libsoc_pwm_set_duty_cycle(vf_pwm, ms);
+			if (ret == EXIT_FAILURE) {
+				perror("PWM set duty cycle failed");
+				goto exit_failure;
+			}
+			ms = ms + STEP_SIZE;
+		}
+		for (ms = DMAX; ms >= DMIN;) {
+			ret = libsoc_pwm_set_duty_cycle(vf_pwm, ms);
+			if (ret == EXIT_FAILURE) {
+				perror("PWM set duty cycle failed");
+				goto exit_failure;
+			}
+			ms = ms - STEP_SIZE;
+		}
+		count--;
+	}
 
 	printf("Disabling PWM\n");
 	ret = libsoc_pwm_set_enabled(vf_pwm, DISABLED);
