@@ -62,7 +62,7 @@ int main(void)
 		return EXIT_FAILURE;
 
 	while (true) {
-		printf("\nEnter choice: 1. Joy stick status 2. Led On/Off 3. Buzzer On/Off 4. Exit\n");
+		printf("\nEnter choice: 1. Joy stick status 2. Led2 On/Off 3. Buzzer On/Off 4. Exit\n");
 		scanf("%d", &input);
 		switch (input) {
 		case 1:
