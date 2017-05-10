@@ -18,7 +18,7 @@ git clone https://github.com/SanchayanMaity/LinuxWorkshop.git
 
 Build and install the OE-Core aka Yocto SDK, for instructions related to building and installing SDK, have a look at this knowledge base [article](http://developer.toradex.com/knowledge-base/linux-sdks).
 
-To facilitate development, a sample SDK can be downloaded from this [link](https://share.toradex.com/erezkkl0c5yunve). Install the SDK by executing the following from the command line
+The Linux image for Vybrid module being used for the workshop can be downloaded [here](https://share.toradex.com/9dlqpzgduzomatw)and flashed to the module as per [Flashing Embedded Linux to Vybrid Modules](http://developer.toradex.com/knowledge-base/flashing-linux-on-vybrid-modules) if required. To facilitate development, a sample SDK can be downloaded from this [link](https://share.toradex.com/erezkkl0c5yunve). Install the SDK by executing the following from the command line
 
 ```
 chmod a+x angstrom-glibc-x86_64-armv7at2hf-neon-v2016.12-toolchain.sh
